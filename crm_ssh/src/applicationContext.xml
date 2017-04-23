@@ -80,11 +80,9 @@
     <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
 
     <!--action 必须配成多例的-->
-    <bean name="userAction" class="com.hecun.crm.web.action.UserAction" scope="prototype">
-    </bean>
+    <bean name="userAction" class="com.hecun.crm.web.action.UserAction" scope="prototype"/>
     <!--service-->
-    <bean name="userService" class="com.hecun.crm.service.impl.UserServiceImpl">
-    </bean>
+    <bean name="userService" class="com.hecun.crm.service.impl.UserServiceImpl"/>
     <!--dao-->
     <bean name="userDao" class="com.hecun.crm.dao.impl.UserDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
