@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <!--这一行是默认配置,可以不配置-->
+    <constant name="struts.objectFactory.spring.autoWire" value="name"/>
+    <!--将Action的创建交给spring-->
+    <constant name="struts.objectFactory" value="spring"/>
+
+    <!--
+        整合方案一:struts.xml中action标签的class属性仍然写Action的全类名,也就是说,Action仍由struts创建.
+                  但是,spring负责组装Action中的依赖属性(Service),也就是在Bean标签中不用加property标签.
+        不推荐!
+    -->
+    <!--<package name="crm" namespace="/" extends="struts-default">-->
+        <!--<action name="userAction_*" class="com.hecun.crm.web.action.UserAction" method="{1}">-->
+            <!--<result name="success">/success.jsp</result>-->
+        <!--</action>-->
+    <!--</package>-->
+
+    <!--
+        整合方案二:spring负责创建action以及组装
+        一旦改成由spring创建Action对象,则spring无法自动组装service到action中,也就是不能通过只配置action和service两个bean来实现自动组装,而是要手动配置,即在action的bean中加入property,装入service
+    -->
+    <package name="crm" namespace="/" extends="struts-default">
+        <action name="userAction_*" class="UserAction" method="{1}">
+            <result name="success">/success.jsp</result>
+        </action>
+    </package>
+</struts>
