@@ -51,6 +51,8 @@
         <property name="mappingDirectoryLocations" value="classpath:com/hecun/crm/domain"/>
     </bean>
 
+    <context:component-scan base-package="com.hecun.crm" />
+
     <!--核心事务管理器-->
     <bean name="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
@@ -80,9 +82,11 @@
     <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
 
     <!--action 必须配成多例的-->
-    <bean name="userAction" class="com.hecun.crm.web.action.UserAction" scope="prototype"/>
+    <bean name="userAction" class="com.hecun.crm.web.action.UserAction" scope="prototype">
+    </bean>
     <!--service-->
-    <bean name="userService" class="com.hecun.crm.service.impl.UserServiceImpl"/>
+    <bean name="userService" class="com.hecun.crm.service.impl.UserServiceImpl">
+    </bean>
     <!--dao-->
     <bean name="userDao" class="com.hecun.crm.dao.impl.UserDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"/>

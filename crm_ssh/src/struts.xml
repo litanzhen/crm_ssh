@@ -4,7 +4,7 @@
         "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
     <!--这一行是默认配置,可以不配置-->
-    <constant name="struts.objectFactory.spring.autoWire" value="name"/>
+    <!--<constant name="struts.objectFactory.spring.autoWire" value="name"/>-->
     <!--将Action的创建交给spring-->
     <constant name="struts.objectFactory" value="spring"/>
 
@@ -24,8 +24,14 @@
         一旦改成由spring创建Action对象,则spring无法自动组装service到action中,也就是不能通过只配置action和service两个bean来实现自动组装,而是要手动配置,即在action的bean中加入property,装入service
     -->
     <package name="crm" namespace="/" extends="struts-default">
-        <action name="userAction_*" class="UserAction" method="{1}">
-            <result name="success">/success.jsp</result>
+
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.RuntimeException" result="error"/>
+        </global-exception-mappings>
+
+        <action name="userAction_*" class="userAction" method="{1}">
+            <result name="toHome" type="redirect">index.htm</result>
+            <result name="error">/login.jsp</result>
         </action>
     </package>
 </struts>
